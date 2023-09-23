@@ -1,21 +1,18 @@
+# -*- coding: utf-8 -*-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
-import os  # Import the os module
 
 st.title('Retail Sales Analysis')
 
-# Get the absolute path to your data directory
-DATA_DIR = os.path.abspath('data')  # Replace 'data' with the actual directory name
+# Define the raw URL for the retail sales dataset on GitHub
+RETAIL_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/retail_sales_dataset.csv'
 
-# Load your retail sales dataset
-RETAIL_DATA_PATH = os.path.join(DATA_DIR, 'retail_sales_dataset.csv')  # Combine the data directory with the file name
-
-@st.cache_data
+@st.cache_resource
 def load_retail_data():
-    data = pd.read_csv(RETAIL_DATA_PATH)
+    data = pd.read_csv(RETAIL_DATA_URL)
     return data
 
 retail_data = load_retail_data()
@@ -38,11 +35,11 @@ axs[1].set_title("Box Plot")
 st.pyplot(fig)
 
 # Load your fraud dataset
-FRAUD_DATA_PATH = os.path.join(DATA_DIR, 'fraud1.csv')  # Combine the data directory with the file name
+FRAUD_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/fraud1.csv'
 
 @st.cache_resource
 def load_fraud_data():
-    data = pd.read_csv(FRAUD_DATA_PATH)
+    data = pd.read_csv(FRAUD_DATA_URL)
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'])  # Convert to datetime
     return data
 
