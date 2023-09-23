@@ -1,4 +1,3 @@
-# Import necessary libraries
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -44,36 +43,39 @@ def load_fraud_data():
 
 fraud_data = load_fraud_data()
 
-# Create the choropleth map
-st.title('Fraud Transaction Choropleth Map')
-st.subheader("Choropleth Map: Transaction Amount by State")
+# Error handling for the choropleth map
+try:
+    st.title('Fraud Transaction Choropleth Map')
+    st.subheader("Choropleth Map: Transaction Amount by State")
 
-fig = px.choropleth(fraud_data,
-                    locations="state",
-                    color="amt",
-                    hover_name="merchant",
-                    animation_frame="trans_date_trans_time",
-                    color_continuous_scale=px.colors.sequential.Plasma,
-                    locationmode="USA-states",
-                    title="Choropleth Map: Transaction Amount by State")
+    fig = px.choropleth(fraud_data,
+                        locations="state",
+                        color="amt",
+                        hover_name="merchant",
+                        animation_frame="trans_date_trans_time",
+                        color_continuous_scale=px.colors.sequential.Plasma,
+                        locationmode="USA-states",
+                        title="Choropleth Map: Transaction Amount by State")
 
-# Add background USA map
-fig.update_geos(
-    visible=False,
-    scope="usa",
-    showcoastlines=True,
-)
+    # Add background USA map
+    fig.update_geos(
+        visible=False,
+        scope="usa",
+        showcoastlines=True,
+    )
 
-# Modify the background map style
-fig.update_geos(
-    lataxis_range=[24, 50],  # Adjust latitude axis range for a better view
-    lonaxis_range=[-125, -66],  # Adjust longitude axis range for a better view
-    showland=True,
-    landcolor="rgb(243, 243, 243)",  # Background color for land
-    showlakes=True,
-    lakecolor="rgb(255, 255, 255)",  # Background color for lakes
-    showocean=True,
-    oceancolor="rgb(230, 255, 255)",  # Background color for oceans
-)
+    # Modify the background map style
+    fig.update_geos(
+        lataxis_range=[24, 50],  # Adjust latitude axis range for a better view
+        lonaxis_range=[-125, -66],  # Adjust longitude axis range for a better view
+        showland=True,
+        landcolor="rgb(243, 243, 243)",  # Background color for land
+        showlakes=True,
+        lakecolor="rgb(255, 255, 255)",  # Background color for lakes
+        showocean=True,
+        oceancolor="rgb(230, 255, 255)",  # Background color for oceans
+    )
 
-st.plotly_chart(fig)
+    st.plotly_chart(fig)
+except Exception as e:
+    st.error(f"An error occurred: {e}")
