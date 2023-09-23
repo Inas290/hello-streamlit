@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,12 +6,12 @@ import plotly.express as px
 
 st.title('Retail Sales Analysis')
 
-# Define the raw URL for the retail sales dataset on GitHub
-RETAIL_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/retail_sales_dataset.csv'
+# Load your retail sales dataset
+RETAIL_DATA_PATH = 'data/retail_sales_dataset.csv'
 
-@st.cache_resource
+@st.cache_data
 def load_retail_data():
-    data = pd.read_csv(RETAIL_DATA_URL)
+    data = pd.read_csv(RETAIL_DATA_PATH)
     return data
 
 retail_data = load_retail_data()
@@ -35,15 +34,19 @@ axs[1].set_title("Box Plot")
 st.pyplot(fig)
 
 # Load your fraud dataset
-FRAUD_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/fraud1.csv'
+FRAUD_DATA_PATH = 'data/fraud1.csv'
 
 @st.cache_resource
 def load_fraud_data():
-    data = pd.read_csv(FRAUD_DATA_URL)
+    data = pd.read_csv(FRAUD_DATA_PATH)
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'])  # Convert to datetime
     return data
 
 fraud_data = load_fraud_data()
+
+# Debugging statements
+st.write(fraud_data.head())  # Print the first few rows of data to check its structure
+st.write(fraud_data.dtypes)  # Print data types of columns
 
 # Create the choropleth map
 st.title('Fraud Transaction Choropleth Map')
