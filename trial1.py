@@ -3,20 +3,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
-import io
-import requests
 
 st.title('Retail Sales Analysis')
 
-# URLs to the CSV files
-RETAIL_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/retail_sales_dataset.csv'
-FRAUD_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/fraud1.csv'
+# Load your retail sales dataset
+RETAIL_DATA_PATH = 'https://github.com/Inas290/hello-streamlit/raw/main/Inas/retail_sales_dataset.csv'
 
 @st.cache
 def load_retail_data():
-    # Read retail data from URL
-    response = requests.get(RETAIL_DATA_URL)
-    data = pd.read_csv(io.StringIO(response.text))
+    data = pd.read_csv(RETAIL_DATA_PATH)
     return data
 
 retail_data = load_retail_data()
@@ -38,11 +33,12 @@ sns.boxplot(data=retail_data, x="Gender", y="Age", ax=axs[1])
 axs[1].set_title("Box Plot")
 st.pyplot(fig)
 
+# Load your fraud dataset
+FRAUD_DATA_PATH = 'https://github.com/Inas290/hello-streamlit/raw/main/Inas/fraud1.csv'
+
 @st.cache
 def load_fraud_data():
-    # Read fraud data from URL
-    response = requests.get(FRAUD_DATA_URL)
-    data = pd.read_csv(io.StringIO(response.text))
+    data = pd.read_csv(FRAUD_DATA_PATH)
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'])  # Convert to datetime
     return data
 
@@ -52,12 +48,16 @@ fraud_data = load_fraud_data()
 st.title('Fraud Transaction Choropleth Map')
 st.subheader("Choropleth Map: Transaction Amount by State")
 
-fig = px.choropleth(fraud_data,
+# Example DataFrame for demonstration
+data = pd.DataFrame({
+    'state': ['NY', 'CA', 'TX', 'FL'],
+    'amt': [1000, 500, 800, 1200]
+})
+
+# Create the choropleth map with example data
+fig = px.choropleth(data,
                     locations="state",
                     color="amt",
-                    hover_name="merchant",
-                    animation_frame="trans_date_trans_time",
-                    color_continuous_scale=px.colors.sequential.Plasma,
                     locationmode="USA-states",
                     title="Choropleth Map: Transaction Amount by State")
 
