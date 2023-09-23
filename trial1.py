@@ -3,15 +3,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+import io
+import requests
 
 st.title('Retail Sales Analysis')
 
-# Load your retail sales dataset
-RETAIL_DATA_PATH = 'https://github.com/Inas290/hello-streamlit/raw/main/data/retail_sales_dataset.csv'
+# URLs to the CSV files
+RETAIL_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/retail_sales_dataset.csv'
+FRAUD_DATA_URL = 'https://raw.githubusercontent.com/Inas290/hello-streamlit/mainInas/fraud1.csv'
 
-@st.cache_data
+@st.cache
 def load_retail_data():
-    data = pd.read_csv(RETAIL_DATA_PATH)
+    # Read retail data from URL
+    response = requests.get(RETAIL_DATA_URL)
+    data = pd.read_csv(io.StringIO(response.text))
     return data
 
 retail_data = load_retail_data()
@@ -33,12 +38,11 @@ sns.boxplot(data=retail_data, x="Gender", y="Age", ax=axs[1])
 axs[1].set_title("Box Plot")
 st.pyplot(fig)
 
-# Load your fraud dataset
-FRAUD_DATA_PATH = 'https://github.com/Inas290/hello-streamlit/raw/main/data/fraud1.csv'
-
-@st.cache_resource
+@st.cache
 def load_fraud_data():
-    data = pd.read_csv(FRAUD_DATA_PATH)
+    # Read fraud data from URL
+    response = requests.get(FRAUD_DATA_URL)
+    data = pd.read_csv(io.StringIO(response.text))
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'])  # Convert to datetime
     return data
 
