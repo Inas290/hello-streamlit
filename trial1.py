@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import requests
+from io import StringIO
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
@@ -7,11 +9,12 @@ import plotly.express as px
 st.title('Retail Sales Analysis')
 
 # Load your retail sales dataset
-RETAIL_DATA_PATH = 'https://github.com/Inas290/hello-streamlit/raw/main/Inas/retail_sales_dataset.csv'
+RETAIL_DATA_URL = 'https://github.com/Inas290/hello-streamlit/raw/main/Inas/retail_sales_dataset.csv'
 
 @st.cache
 def load_retail_data():
-    data = pd.read_csv(RETAIL_DATA_PATH)
+    response = requests.get(RETAIL_DATA_URL)
+    data = pd.read_csv(StringIO(response.text))
     return data
 
 retail_data = load_retail_data()
@@ -33,12 +36,13 @@ sns.boxplot(data=retail_data, x="Gender", y="Age", ax=axs[1])
 axs[1].set_title("Box Plot")
 st.pyplot(fig)
 
-# Load your fraud dataset
-FRAUD_DATA_PATH = 'https://github.com/Inas290/hello-streamlit/raw/main/Inas/fraud1.csv'
+
+FRAUD_DATA_URL = 'https://github.com/Inas290/hello-streamlit/raw/main/Inas/fraud1.csv'
 
 @st.cache
 def load_fraud_data():
-    data = pd.read_csv(FRAUD_DATA_PATH)
+    response = requests.get(FRAUD_DATA_URL)
+    data = pd.read_csv(StringIO(response.text))
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'])  # Convert to datetime
     return data
 
@@ -47,17 +51,12 @@ fraud_data = load_fraud_data()
 # Create the choropleth map
 st.title('Fraud Transaction Choropleth Map')
 st.subheader("Choropleth Map: Transaction Amount by State")
-
-# Example DataFrame for demonstration
-data = pd.DataFrame({
-    'state': ['NY', 'CA', 'TX', 'FL'],
-    'amt': [1000, 500, 800, 1200]
-})
-
-# Create the choropleth map with example data
-fig = px.choropleth(data,
+fig = px.choropleth(fraud_data,
                     locations="state",
                     color="amt",
+                    hover_name="merchant",
+                    animation_frame="trans_date_trans_time",
+                    color_continuous_scale=px.colors.sequential.Plasma,
                     locationmode="USA-states",
                     title="Choropleth Map: Transaction Amount by State")
 
@@ -81,3 +80,7 @@ fig.update_geos(
 )
 
 st.plotly_chart(fig)
+
+# Run the Streamlit app
+if __name__ == '__main__':
+    st.write(retail_data)  # Display the loaded retail data for testing
