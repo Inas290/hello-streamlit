@@ -16,7 +16,7 @@ import plotly.express as px
 st.title('Retail Sales Analysis')
 
 # Load your retail sales dataset
-RETAIL_DATA_PATH = 'C:/Users/inas_/OneDrive/Desktop/Dr Fouad/Inas Khattar - Assignment MSBA 325/retail_sales_dataset.csv'
+RETAIL_DATA_PATH = 'data/retail_sales_dataset.csv'
 
 @st.cache_data
 def load_retail_data():
@@ -43,7 +43,7 @@ axs[1].set_title("Box Plot")
 st.pyplot(fig)
 
 # Load your fraud dataset
-FRAUD_DATA_PATH = 'C:/Users/inas_/OneDrive/Desktop/Dr Fouad/Inas Khattar - Assignment MSBA 325/fraud1.csv'
+FRAUD_DATA_PATH = 'data/fraud1.csv'
 
 @st.cache_resource
 def load_fraud_data():
