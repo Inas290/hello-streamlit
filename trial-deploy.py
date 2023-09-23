@@ -39,6 +39,7 @@ st.pyplot(fig)
 def load_fraud_data():
     data = pd.read_csv(FRAUD_DATA_URL)
     data['trans_date_trans_time'] = pd.to_datetime(data['trans_date_trans_time'])  # Convert to datetime
+    data['trans_date_trans_time_str'] = data['trans_date_trans_time'].dt.strftime('%Y-%m-%d %H:%M:%S')
     return data
 
 fraud_data = load_fraud_data()
@@ -52,7 +53,7 @@ try:
                         locations="state",
                         color="amt",
                         hover_name="merchant",
-                        animation_frame="trans_date_trans_time",
+                        animation_frame="trans_date_trans_time_str",  # Use the string column for animation frames
                         color_continuous_scale=px.colors.sequential.Plasma,
                         locationmode="USA-states",
                         title="Choropleth Map: Transaction Amount by State")
