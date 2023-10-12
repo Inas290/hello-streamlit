@@ -23,7 +23,6 @@ if user_menu == 'Home Page':
     # Display title, description, and photo for the Home Page
     st.title("Title")
     st.write("Write description\nOther description")
-    st.image("Media/Name.gif", use_column_width=True)
 
 elif user_menu == "Select Country":
     st.title("Country Data Visualization")
