@@ -80,7 +80,6 @@ elif user_menu == "Tourism per Stay Mode":
     #st.plotly_chart(fig)
 
 
-    elif user_menu == "Tourism per Stay Mode":
     st.title("Notched Horizontal Box Plot")
     
     # Create a notched horizontal box plot using Plotly Express
