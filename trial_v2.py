@@ -26,7 +26,7 @@ if user_menu == 'Home Page':
     st.image("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/tour.jpg")
 
 elif user_menu == "Tourism per Country":
-    st.title("Country Data Visualization")
+    st.title("Tourism per Country Data Visualization")
     # Select the countries you want to plot (in this example, all countries)
     countries = df['Country'].unique()
     selected_country = st.selectbox("Select a Country", countries)
@@ -43,7 +43,7 @@ elif user_menu == "Tourism per Country":
         yearly_data = data_country.iloc[:, 2:]
 
         # Convert string data to numbers (may contain commas)
-        # yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
+        yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
 
         # Transpose the data so that years are on the x-axis
         yearly_data = yearly_data.T
