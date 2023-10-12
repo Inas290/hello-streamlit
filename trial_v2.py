@@ -67,34 +67,12 @@ elif user_menu == "Tourism per Stay Mode":
         # Create a notched horizontal box plot using Plotly Express
      #   fig = px.box(data_variable, x='Value', y='Category', color='Category', title=f'Box Plot of {variable} by Category')
       #  st.plotly_chart(fig)
-    
-    
-    #st.title("Notched Horizontal Box Plot")
-    
-    # Create a notched horizontal box plot using Plotly Express
-    #fig = px.box(df, x='2021', y='Country', color='Variable', notched=True,
-    #             category_orders={"variable": ["Total domestic trips", "Overnight visitors (tourists)"]},
-    #             title="Notched Horizontal Box Plot: Money Spent in 2021 by Tourists in eavh Country (Colored by Variable)")
-    
-    # Display the plot using st.plotly_chart
-    #st.plotly_chart(fig)
 
+    # Create the notched horizontal box plot
+    st.title('Tourism filtered by Stay Mode')
+    st.subheader("Notched Horizontal Box Plot: Total Amount vs. Stay Mode")
+    fig = px.box(x=df.iloc[:, 2:], y=df['Country'], orientation="h", color=df['Variable'], notched=True,
+             variable={df['Variable']: ["Total domestic trips", "Overnight visitors (tourists)"]},
+             title="Notched Horizontal Box Plot: Total Amount vs. Stay Mode")
 
-    #st.title("Notched Horizontal Box Plot")
-    
-    # Create a notched horizontal box plot using Plotly Express
-    #fig = px.box(df.melt(id_vars=['Country', 'Variable'], var_name='Year', value_name='Money_Spent'),
-    #             x='Money_Spent', y='Country', color='Variable', notched=True,
-    #             category_orders={"Variable": ["Total domestic trips", "Overnight visitors (tourists)"]},
-    #             title="Notched Horizontal Box Plot: Money Spent by Tourists in Each Country (Colored by Variable)")
-
-    st.title("Notched Horizontal Box Plot")
-    
-    # Create a notched horizontal box plot using Plotly Express
-    fig = px.box(df.melt(id_vars=['Country', 'Variable'], var_name='Year', value_name='Money_Spent'),
-                 x='Year', y='Country', color='Variable', notched=True,
-                 category_orders={"Variable": ["Total domestic trips", "Overnight visitors (tourists)"]},
-                 title="Notched Horizontal Box Plot: Money Spent by Tourists in Each Country (Colored by Variable)")
-    
-    # Display the plot using st.plotly_chart
     st.plotly_chart(fig)
