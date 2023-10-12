@@ -3,8 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-@st.cache
-
 # Load the data from a CSV file
 df = pd.read_csv("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/dataset-v2.csv")
 
@@ -27,6 +25,7 @@ if user_menu == 'Home Page':
     st.write("Tourism is a dynamic and global industry that revolves around the concept of people traveling to various destinations for leisure, adventure, or exploration. It plays a pivotal role in promoting cultural exchange, economic growth, and mutual understanding between nations. Tourists seek diverse experiences, from relaxing on exotic beaches and exploring historical landmarks to immersing themselves in the rich tapestry of different cultures. As a powerful economic driver, tourism generates revenue, creates job opportunities, and sustains local communities. It also encourages environmental conservation and the preservation of heritage sites. In essence, tourism is a vibrant and multifaceted sector that bridges cultures, fosters economic development, and kindles a sense of wonder in travelers worldwide.")
     st.image("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/tour.jpg")
 
+@st.cache
 elif user_menu == "Select Country":
     st.title("Country Data Visualization")
     # Select the countries you want to plot (in this example, all countries)
@@ -58,7 +57,7 @@ elif user_menu == "Select Country":
         plt.title(f'{variable} by Year in {selected_country}')
         plt.xticks(rotation=45)
         plt.grid(True)
-
+@st.cache
 elif user_menu == "Create Box Plot":
     st.title("Category Box Plots")
     # Select the variable to study
