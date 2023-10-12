@@ -53,20 +53,21 @@ elif user_menu == "Tourism per Country":
         st.plotly_chart(fig)
 
 elif user_menu == "Tourism per Stay Mode":
-    st.title("Grouped Bar Plot for Tourism Data")
+    df = pd.DataFrame(df)
 
-    # Specify x as the 'country' column, y as the years, and color as the 'variable' (stay mode)
-    x = 'country'
-    y = ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
-    color = 'variable'
+    # Streamlit app
+    st.title("Grouped Bar Plot")
+    st.subheader("Money Spent by Country and Variable")
 
-    # Create the grouped bar plot
-    fig = px.bar(df, x=x, y=y, color=color,
-             labels={'variable': 'Stay Mode'},
-             title='Total Spending by Year and Stay Mode in Different Countries')
+    # Create a grouped bar plot
+    fig = px.bar(
+        df.melt(id_vars=["Country", "Variable"], var_name="Year", value_name="Money_Spent"),
+        x="Country",
+        y="Money_Spent",
+        color="Variable",
+        barmode="group",
+        title="Money Spent by Country and Variable"
+    )
 
-    # Customize the layout
-    fig.update_layout(barmode='group', xaxis_title='Country', yaxis_title='Total Spending')
-
-    # Display the plot in Streamlit
+    # Display the plot
     st.plotly_chart(fig)
