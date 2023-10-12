@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the data from a CSV file
-df = pd.read_csv("Name of file.csv")
+df = pd.read_csv("dataset-v2.csv")
 
 # Create a Streamlit app
 st.set_page_config(
