@@ -91,8 +91,9 @@ elif user_menu == "Tourism per Stay Mode":
         title="Money Spent by Country and Variable"
     )
 
-    # Customize the colors
-    fig.update_traces(marker=dict(color=['purple', 'navy']))
+    # Customize the colors of the bars
+    fig.update_traces(marker_color=["purple", "navy"])
 
     # Display the plot
     st.plotly_chart(fig)
+
