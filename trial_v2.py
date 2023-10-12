@@ -70,7 +70,7 @@ elif user_menu == "Create Box Plot":
         st.write(f"No data available for {variable}")
     else:
         # Create a box plot
-        st.pyplot(plt.figure(figsize=(10, 6))
+        st.pyplot(plt.figure(figsize=(10, 6)))
         sns.boxplot(x='Category', y='Value', data=data_variable)
         plt.title(f'Box Plot of {variable} by Category')
         plt.xticks(rotation=45)
