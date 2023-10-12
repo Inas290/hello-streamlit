@@ -24,8 +24,3 @@ else:
     plt.title(f'Box Plot of {variable} by Category')
     plt.xticks(rotation=45)
     plt.grid(True)
-
-Original file is located at
-    https://colab.research.google.com/drive/1L9dETODQRURUL3ArBk6aLQAYi32e9hT3
-"""
-
