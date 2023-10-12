@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-from Tabs.Name1 import Name1
+from Tabs.figure1 import figure1
 from Tabs.Name2 import Name2
 
 # Load the data from a CSV file
@@ -31,8 +31,8 @@ def main():
         # Title for the "Title 1" tab
         st.title("Title of tab1")
 
-        # Calling the function of the Name1 tab
-        Name1(data)
+        # Calling the function of the figure1 tab
+        figure1(data)
 
     elif user_menu == "Title 2":
         # Title for the "Title 2" tab
