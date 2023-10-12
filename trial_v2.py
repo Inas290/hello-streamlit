@@ -8,7 +8,7 @@ df = pd.read_csv("https://raw.githubusercontent.com/Inas290/hello-streamlit/main
 
 # Create a Streamlit app
 st.set_page_config(
-    page_title="Your App Title",
+    page_title="Tourism Dataset",
     page_icon=":chart_with_upwards_trend:",
     layout="wide",
 )
@@ -16,16 +16,16 @@ st.set_page_config(
 st.sidebar.title("Navigation")
 user_menu = st.sidebar.radio(
     'Select an Option',
-    ('Home Page', 'Select Country', 'Create Box Plot')
+    ('Home Page', 'Tourism per Country', 'Tourism per Stay Type')
 )
 
 if user_menu == 'Home Page':
     # Display title, description, and photo for the Home Page
-    st.title("Title")
+    st.title("Tourism")
     st.write("Tourism is a dynamic and global industry that revolves around the concept of people traveling to various destinations for leisure, adventure, or exploration. It plays a pivotal role in promoting cultural exchange, economic growth, and mutual understanding between nations. Tourists seek diverse experiences, from relaxing on exotic beaches and exploring historical landmarks to immersing themselves in the rich tapestry of different cultures. As a powerful economic driver, tourism generates revenue, creates job opportunities, and sustains local communities. It also encourages environmental conservation and the preservation of heritage sites. In essence, tourism is a vibrant and multifaceted sector that bridges cultures, fosters economic development, and kindles a sense of wonder in travelers worldwide.")
     st.image("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/tour.jpg")
 
-elif user_menu == "Select Country":
+elif user_menu == "Tourism per Country":
     st.title("Country Data Visualization")
     # Select the countries you want to plot (in this example, all countries)
     countries = df['Country'].unique()
@@ -43,7 +43,7 @@ elif user_menu == "Select Country":
         yearly_data = data_country.iloc[:, 2:]
 
         # Convert string data to numbers (may contain commas)
-        yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
+        # yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
 
         # Transpose the data so that years are on the x-axis
         yearly_data = yearly_data.T
@@ -57,8 +57,8 @@ elif user_menu == "Select Country":
         plt.xticks(rotation=45)
         plt.grid(True)
 
-elif user_menu == "Create Box Plot":
-    st.title("Category Box Plots")
+elif user_menu == "Tourism per Stay Type":
+    st.title("Tourism per Stay Type")
     # Select the variable to study
     variable = st.selectbox("Select a Variable", df['Variable'].unique())
 
