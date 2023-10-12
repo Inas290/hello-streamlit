@@ -57,8 +57,8 @@ elif user_menu == "Tourism per Country":
         plt.xticks(rotation=45)
         plt.grid(True)
 
-elif user_menu == "Tourism per Stay Type":
-    st.title("Tourism per Stay Type")
+elif user_menu == "Create Box Plot":
+    st.title("Category Box Plots")
     # Select the variable to study
     variable = st.selectbox("Select a Variable", df['Variable'].unique())
 
@@ -75,3 +75,21 @@ elif user_menu == "Tourism per Stay Type":
         plt.title(f'Box Plot of {variable} by Category')
         plt.xticks(rotation=45)
         plt.grid(True)
+
+    # Create the notched horizontal box plot
+    st.title('Retail Sales Analysis')
+    st.subheader("Notched Horizontal Box Plot: Total Amount vs. Product Category (Colored by Gender)")
+    fig = px.box(retail_data, x="Total Amount", y="Product Category", orientation="h", color="Gender", notched=True,
+                 category_orders={"Product Category": ["Category1", "Category2", "Category3", "Category4"]},
+                 title="Notched Horizontal Box Plot: Total Amount vs. Product Category (Colored by Gender)")
+
+    st.plotly_chart(fig)
+
+    # Add marginal plots (violin plot and box plot)
+    st.subheader("Marginal Plots")
+    fig, axs = plt.subplots(1, 2, figsize=(12, 6))
+    sns.violinplot(data=retail_data, x="Gender", y="Total Amount", ax=axs[0])
+    axs[0].set_title("Violin Plot")
+    sns.boxplot(data=retail_data, x="Gender", y="Age", ax=axs[1])
+    axs[1].set_title("Box Plot")
+    st.pyplot(fig)
