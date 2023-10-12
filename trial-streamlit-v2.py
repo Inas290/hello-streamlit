@@ -5,7 +5,7 @@ from Tabs.figure1 import figure1
 from Tabs.figure2 import figure2
 
 # Load the data from a CSV file
-data = pd.read_csv("Name of file.csv")
+data = pd.read_csv("dataset-v2.csv")
 
 # CREATE STREAMLIT APP
 def main():
