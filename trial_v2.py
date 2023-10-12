@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the data from a CSV file
-df = pd.read_csv("dataset-v2.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/dataset-v2.csv")
 
 # Create a Streamlit app
 st.set_page_config(
@@ -23,7 +23,7 @@ if user_menu == 'Home Page':
     # Display title, description, and photo for the Home Page
     st.title("Title")
     st.write("Tourism is a dynamic and global industry that revolves around the concept of people traveling to various destinations for leisure, adventure, or exploration. It plays a pivotal role in promoting cultural exchange, economic growth, and mutual understanding between nations. Tourists seek diverse experiences, from relaxing on exotic beaches and exploring historical landmarks to immersing themselves in the rich tapestry of different cultures. As a powerful economic driver, tourism generates revenue, creates job opportunities, and sustains local communities. It also encourages environmental conservation and the preservation of heritage sites. In essence, tourism is a vibrant and multifaceted sector that bridges cultures, fosters economic development, and kindles a sense of wonder in travelers worldwide.")
-    st.image("image")
+    st.image("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/tour.jpg")
 
 elif user_menu == "Select Country":
     st.title("Country Data Visualization")
