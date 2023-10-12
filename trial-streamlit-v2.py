@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from Tabs.figure1 import figure1
-from Tabs.Name2 import Name2
+from Tabs.figure2 import figure2
 
 # Load the data from a CSV file
 data = pd.read_csv("Name of file.csv")
@@ -38,8 +38,8 @@ def main():
         # Title for the "Title 2" tab
         st.title("Title of tab2")
 
-        # Calling the function of the Name2 tab
-        Name2(data)
+        # Calling the function of the figure2 tab
+        figure2(data)
 
 if __name__ == '__main__':
     main()
