@@ -53,17 +53,26 @@ elif user_menu == "Tourism per Country":
         st.plotly_chart(fig)
 
 elif user_menu == "Tourism per Stay Mode":
-    st.title("Category Box Plots")
+    #st.title("Category Box Plots")
     # Select the variable to study
-    variable = st.selectbox("Select a Variable", df['Variable'].unique())
+    #variable = st.selectbox("Select a Variable", df['Variable'].unique())
 
     # Filter the data for the selected variable
-    data_variable = df[df['Variable'] == variable]
+    #data_variable = df[df['Variable'] == variable]
 
     # Check if data exists for the selected variable
-    if data_variable.empty:
-        st.write(f"No data available for {variable}")
-    else:
+    #if data_variable.empty:
+    #    st.write(f"No data available for {variable}")
+    #else:
         # Create a notched horizontal box plot using Plotly Express
-        fig = px.box(data_variable, x='Value', y='Category', color='Category', title=f'Box Plot of {variable} by Category')
-        st.plotly_chart(fig)
+     #   fig = px.box(data_variable, x='Value', y='Category', color='Category', title=f'Box Plot of {variable} by Category')
+      #  st.plotly_chart(fig)
+    st.title("Notched Horizontal Box Plot")
+    
+    # Create a notched horizontal box plot using Plotly Express
+    fig = px.box(df, x='2021', y='Country', color='Variable', notched=True,
+                 category_orders={"variable": ["Total domestic trips", "Overnight visitors (tourists)"]},
+                 title="Notched Horizontal Box Plot: Money Spent in 2021 by Tourists in eavh Country (Colored by Variable)")
+    
+    # Display the plot using st.plotly_chart
+    st.plotly_chart(fig)
