@@ -57,8 +57,8 @@ elif user_menu == "Tourism per Country":
         plt.xticks(rotation=45)
         plt.grid(True)
 
-elif user_menu == "Create Box Plot":
-    st.title("Category Box Plots")
+elif user_menu == "Tourism per Stay Type":
+    st.title("Tourism per Stay Type")
     # Select the variable to study
     variable = st.selectbox("Select a Variable", df['Variable'].unique())
 
