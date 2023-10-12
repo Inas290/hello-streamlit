@@ -71,8 +71,9 @@ elif user_menu == "Tourism per Stay Mode":
     # Create the notched horizontal box plot
     st.title('Tourism filtered by Stay Mode')
     st.subheader("Notched Horizontal Box Plot: Total Amount vs. Stay Mode")
-    fig = px.box(x=df.iloc[:, 2:], y=df['Country'], orientation="h", color=df['Variable'], notched=True,
-             variable={df['Variable']: ["Total domestic trips", "Overnight visitors (tourists)"]},
-             title="Notched Horizontal Box Plot: Total Amount vs. Stay Mode")
+    yearly_data = df.iloc[:, 2:]
+    fig = px.box(yearly_data, x = yearly_data.index, y = "Country", orientation="h", color="Variable", notched=True,
+             Variable={"Variable": ["Total domestic trips", "  Overnight visitors (tourists)"]},
+             title="Notched Horizontal Box Plot: Countries vs. Total Amount (Categorized by Stay Mode)")
 
     st.plotly_chart(fig)
