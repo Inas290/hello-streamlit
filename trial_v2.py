@@ -80,13 +80,18 @@ elif user_menu == "Tourism per Stay Mode":
     #st.plotly_chart(fig)
 
 
-    st.title("Notched Horizontal Box Plot")
+    #st.title("Notched Horizontal Box Plot")
     
     # Create a notched horizontal box plot using Plotly Express
-    fig = px.box(df.melt(id_vars=['Country', 'Variable'], var_name='Year', value_name='Money_Spent'),
+    #fig = px.box(df.melt(id_vars=['Country', 'Variable'], var_name='Year', value_name='Money_Spent'),
                  x='Money_Spent', y='Country', color='Variable', notched=True,
                  category_orders={"Variable": ["Total domestic trips", "Overnight visitors (tourists)"]},
                  title="Notched Horizontal Box Plot: Money Spent by Tourists in Each Country (Colored by Variable)")
-    
+
+    st.title("Box Plot: Money Spent by Tourists in Each Country (Colored by Variable)")
+
+    # Create a box plot using Plotly Express
+    fig = px.box(df, x=df.columns[2:], y='Country', color='Variable', title="Box Plot of Money Spent by Country (Colored by Variable)")
+
     # Display the plot using st.plotly_chart
     st.plotly_chart(fig)
