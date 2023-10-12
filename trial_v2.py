@@ -26,38 +26,28 @@ if user_menu == 'Home Page':
     st.image("https://raw.githubusercontent.com/Inas290/hello-streamlit/main/tour.jpg")
 
 elif user_menu == "Select Country":
-    @st.cache
-    def load_selected_country_data(selected_country):
-        # Filter the data for the selected country
-        data_country = df[df['Country'] == selected_country]
-
-        # Check if data exists for the selected country
-        if data_country.empty:
-            return None
-        else:
-            # Extract the variable and yearly data
-            variable = data_country['Variable'].values[0]
-            yearly_data = data_country.iloc[:, 2:]
-
-            # Convert string data to numbers (may contain commas)
-            yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
-
-            # Transpose the data so that years are on the x-axis
-            yearly_data = yearly_data.T
-
-            return variable, yearly_data
-
     st.title("Country Data Visualization")
     # Select the countries you want to plot (in this example, all countries)
     countries = df['Country'].unique()
     selected_country = st.selectbox("Select a Country", countries)
 
-    data = load_selected_country_data(selected_country)
+    # Filter the data for the selected country
+    data_country = df[df['Country'] == selected_country]
 
-    if data is None:
+    # Check if data exists for the selected country
+    if data_country.empty:
         st.write(f"No data available for {selected_country}")
     else:
-        variable, yearly_data = data
+        # Extract the variable and yearly data
+        variable = data_country['Variable'].values[0]
+        yearly_data = data_country.iloc[:, 2:]
+
+        # Convert string data to numbers (may contain commas)
+        yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
+
+        # Transpose the data so that years are on the x-axis
+        yearly_data = yearly_data.T
+
         # Set up the plot
         st.pyplot(plt.figure(figsize=(12, 6)))
         plt.plot(yearly_data.index, yearly_data.values, marker='o')
@@ -68,29 +58,19 @@ elif user_menu == "Select Country":
         plt.grid(True)
 
 elif user_menu == "Create Box Plot":
-    @st.cache
-    def load_selected_variable_data(variable):
-        # Filter the data for the selected variable
-        data_variable = df[df['Variable'] == variable]
-
-        # Check if data exists for the selected variable
-        if data_variable.empty:
-            return None
-        else:
-            return data_variable
-
     st.title("Category Box Plots")
     # Select the variable to study
     variable = st.selectbox("Select a Variable", df['Variable'].unique())
 
-    data = load_selected_variable_data(variable)
+    # Filter the data for the selected variable
+    data_variable = df[df['Variable'] == variable]
 
-    if data is None:
+    # Check if data exists for the selected variable
+    if data_variable.empty:
         st.write(f"No data available for {variable}")
     else:
-        data_variable = data
         # Create a box plot
-        st.pyplot(plt.figure(figsize=(10, 6))
+        st.pyplot(plt.figure(figsize=(10, 6)))
         sns.boxplot(x='Category', y='Value', data=data_variable)
         plt.title(f'Box Plot of {variable} by Category')
         plt.xticks(rotation=45)
