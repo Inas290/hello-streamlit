@@ -42,11 +42,20 @@ elif user_menu == "Select Country":
         variable = data_country['Variable'].values[0]
         yearly_data = data_country.iloc[:, 2:]
 
+        # Ensure that the DataFrame is correctly structured
+        st.write(yearly_data.head())  # Check the structure of the DataFrame
+        
         # Convert string data to numbers (may contain commas)
-        yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float))
+        yearly_data = yearly_data.apply(lambda x: x.str.replace(',', '').astype(float)
+
+        # Check the structure of the transformed DataFrame
+        st.write(yearly_data.head())
 
         # Transpose the data so that years are on the x-axis
         yearly_data = yearly_data.T
+
+        # Check the structure of the transposed DataFrame
+        st.write(yearly_data.head())
 
         # Set up the plot
         st.pyplot(plt.figure(figsize=(12, 6)))
@@ -57,21 +66,3 @@ elif user_menu == "Select Country":
         plt.xticks(rotation=45)
         plt.grid(True)
 
-elif user_menu == "Create Box Plot":
-    st.title("Category Box Plots")
-    # Select the variable to study
-    variable = st.selectbox("Select a Variable", df['Variable'].unique())
-
-    # Filter the data for the selected variable
-    data_variable = df[df['Variable'] == variable]
-
-    # Check if data exists for the selected variable
-    if data_variable.empty:
-        st.write(f"No data available for {variable}")
-    else:
-        # Create a box plot
-        st.pyplot(plt.figure(figsize=(10, 6)))
-        sns.boxplot(x='Category', y='Value', data=data_variable)
-        plt.title(f'Box Plot of {variable} by Category')
-        plt.xticks(rotation=45)
-        plt.grid(True)
