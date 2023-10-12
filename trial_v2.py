@@ -53,27 +53,20 @@ elif user_menu == "Tourism per Country":
         st.plotly_chart(fig)
 
 elif user_menu == "Tourism per Stay Mode":
-    #st.title("Category Box Plots")
-    # Select the variable to study
-    #variable = st.selectbox("Select a Variable", df['Variable'].unique())
+    st.title("Grouped Bar Plot for Tourism Data")
 
-    # Filter the data for the selected variable
-    #data_variable = df[df['Variable'] == variable]
+    # Select the columns for the x-axis (country), y-axis (years), and color (stay mode)
+    x = 'Country'
+    y = ['2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021']
+    color = 'Variable'
 
-    # Check if data exists for the selected variable
-    #if data_variable.empty:
-    #    st.write(f"No data available for {variable}")
-    #else:
-        # Create a notched horizontal box plot using Plotly Express
-     #   fig = px.box(data_variable, x='Value', y='Category', color='Category', title=f'Box Plot of {variable} by Category')
-      #  st.plotly_chart(fig)
+    # Create a grouped bar plot
+    fig = px.bar(df, x=x, y=y, color=color,
+             labels={'variable': 'Stay Mode'},
+             title='Total Spending by Year and Stay Mode in Different Countries')
 
-    # Create the notched horizontal box plot
-    st.title('Tourism filtered by Stay Mode')
-    st.subheader("Notched Horizontal Box Plot: Total Amount vs. Stay Mode")
-    yearly_data = df.iloc[:, 2:]
-    fig = px.box(yearly_data, x = yearly_data.index, y = "Country", orientation="h", color="Variable", notched=True,
-             Variable={"Variable": ["Total domestic trips", "  Overnight visitors (tourists)"]},
-             title="Notched Horizontal Box Plot: Countries vs. Total Amount (Categorized by Stay Mode)")
+    # Customize the layout
+    fig.update_layout(barmode='group', xaxis_title='Country', yaxis_title='Total Spending')
 
+    # Display the plot in Streamlit
     st.plotly_chart(fig)
