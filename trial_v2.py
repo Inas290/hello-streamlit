@@ -27,6 +27,7 @@ if user_menu == 'Home Page':
 
 elif user_menu == "Tourism per Country":
     st.title("Country Data Visualization")
+    st.write("Tourism rates have exhibited fluctuating trends over the years, prompting the need for more comprehensive data analysis and an in-depth understanding of the contributing factors. These changes can be attributed to a multitude of variables, including economic conditions, geopolitical stability, environmental factors, and shifting travel preferences. Economic factors, such as changes in exchange rates and income levels, significantly influence people's travel decisions. Additionally, geopolitical events, like conflicts or changes in visa policies, can deter or attract tourists. Environmental concerns, such as natural disasters or climate change impacts, can affect the desirability of certain destinations. Furthermore, evolving consumer preferences, driven by trends like sustainable and experiential travel, add complexity to the equation. To truly comprehend these shifts in tourism rates, it is imperative to delve into extensive data analysis and consider the intricate interplay of these multifaceted variables.")
     # Select the countries you want to plot (in this example, all countries)
     countries = df['Country'].unique()
     selected_country = st.selectbox("Select a Country", countries)
@@ -57,6 +58,7 @@ elif user_menu == "Tourism per Stay Mode":
 
     # Streamlit app
     st.title("Grouped Bar Plot")
+    st.write("Overnight tourism, historically a cornerstone of the tourism industry, is showing signs of diminishing significance in the broader landscape of travel. Increasingly, tourists are gravitating towards day trips and experiences that don't require an overnight stay. This shift can be attributed to a variety of factors, including the rise of spontaneous or short-term travel, the popularity of urban day trips, and the desire for more flexible and budget-conscious options. With the advent of advanced transportation systems and the ubiquity of online information, travelers can easily explore attractions and activities within easy reach of their home base. The modern tourist often prioritizes efficient use of time and resources, opting for day tours and excursions that allow them to explore multiple destinations in a shorter timeframe. Consequently, the tourism industry must adapt to this evolving trend and consider alternative approaches to engage and cater to this new breed of travelers who seek memorable experiences without the need for an overnight stay.")
     st.subheader("Money Spent by Country and Variable")
 
     # Create a grouped bar plot
